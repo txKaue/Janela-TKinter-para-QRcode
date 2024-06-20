@@ -21,8 +21,10 @@ def CriarQr(url):
 
 def GerarImagem(tela, url):
     img = CriarQr(url)
+    img = img.resize((300, 300))
     img_tk = ImageTk.PhotoImage(img)
 
     label_img = tk.Label(tela, image=img_tk)
     label_img.image = img_tk
-    label_img.pack(pady=20)
+    label_img.pack(pady=10)
+    
