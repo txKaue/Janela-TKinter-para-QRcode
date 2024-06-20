@@ -1,6 +1,8 @@
 # Ignorar diretórios de cache do Python
 __pycache__/
 *.py[cod]
+build/
+dist/
 
 # Ignorar arquivos de ambiente virtual
 .env
@@ -23,3 +25,9 @@ Thumbs.db
 .vscode/
 *.sublime-project
 *.sublime-workspace
+
+# Ignorar arquivos específicos
+
+Tela.spec
+CriadorDeQR.spec
+

@@ -1,6 +1,6 @@
 import tkinter as tk
-import GeraQr as qr
-import TelaNovoQr 
+import Classes.GeraQr as qr
+import Classes.TelaNovoQr as TelaNovoQr 
 
 
 
