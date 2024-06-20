@@ -1,0 +1,10 @@
+# Projeto em Python com TkInter e PillowQrCode
+
+## Dependências: 
+- pip install pillow qrcode[pil]
+- pip install tkinter
+
+## Considerações:
+
+Com essa aplicação, o usuário pode gerar um QRCode e mostrar ele na tela de forma que um celular possa escanear o código.
+O QRCode pode ser gerado com qualquer URL.
