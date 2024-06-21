@@ -1,5 +1,7 @@
 import tkinter as tk
 import Tela
+import json
+import os
 
 url = ""
 
@@ -44,6 +46,22 @@ def TelaAlterarQr():
         if texto != placeholder_texto:
             print(f"Texto inserido: {texto}")
             url = texto
+
+            caminho_arquivo = '../TKINTERTESTE/Data/data.json'
+            diretorio_atual = os.getcwd()
+            caminho_completo = os.path.join(diretorio_atual, caminho_arquivo)
+            if not os.path.exists(caminho_completo):
+                print(f"Arquivo não encontrado: {caminho_completo}")
+                return
+
+            with open(caminho_completo, 'r') as file:
+                dados = json.load(file)
+
+            dados['url'] = url
+
+            with open(caminho_completo, 'w') as file:
+                json.dump(dados, file, indent=4)
+
             nova_janela.destroy()
             Tela.CriarTela(url)
             

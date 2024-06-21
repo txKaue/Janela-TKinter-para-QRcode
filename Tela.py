@@ -1,6 +1,7 @@
 import tkinter as tk
 import Classes.GeraQr as qr
 import Classes.TelaNovoQr as TelaNovoQr 
+import json
 
 
 
@@ -29,7 +30,12 @@ def CriarTela(url):
     titulo.pack(pady=20) # Ajustando a posição
 
     if (url == ""):
-        url_que_vai = "https://github.com/txKaue"
+
+        with open('./Data/data.json', 'r') as file:
+            dados = json.load(file)
+
+        url_que_vai = dados["url"]
+
     else:
         url_que_vai = url
         
