@@ -2,6 +2,7 @@ import tkinter as tk
 import Tela
 import json
 import os
+from Classes import VerificaUrl
 
 url = ""
 
@@ -10,10 +11,9 @@ def adicionar_placeholder(entry, placeholder):
     entry.bind("<FocusIn>", lambda event: remover_placeholder(entry, placeholder))
     entry.bind("<FocusOut>", lambda event: restaurar_placeholder(entry, placeholder))
 
-def remover_placeholder(entry, placeholder):
-    if entry.get() == placeholder:
-        entry.delete(0, tk.END)
-        entry.config(fg='black')
+def remover_placeholder(entry):
+    entry.delete(0, tk.END)  
+    entry.config(fg='black')  
 
 def restaurar_placeholder(entry, placeholder):
     if entry.get() == "":
@@ -47,23 +47,32 @@ def TelaAlterarQr():
             print(f"Texto inserido: {texto}")
             url = texto
 
-            caminho_arquivo = '../TKINTERTESTE/Data/data.json'
-            diretorio_atual = os.getcwd()
-            caminho_completo = os.path.join(diretorio_atual, caminho_arquivo)
-            if not os.path.exists(caminho_completo):
-                print(f"Arquivo não encontrado: {caminho_completo}")
-                return
+            status = VerificaUrl.VerificaUrl(url)
 
-            with open(caminho_completo, 'r') as file:
-                dados = json.load(file)
+            if status == True:
 
-            dados['url'] = url
+                caminho_arquivo = '../TKINTERTESTE/Data/data.json'
+                diretorio_atual = os.getcwd()
+                caminho_completo = os.path.join(diretorio_atual, caminho_arquivo)
+                if not os.path.exists(caminho_completo):
+                    print(f"Arquivo não encontrado: {caminho_completo}")
+                    return
 
-            with open(caminho_completo, 'w') as file:
-                json.dump(dados, file, indent=4)
+                with open(caminho_completo, 'r') as file:
+                    dados = json.load(file)
 
-            nova_janela.destroy()
-            Tela.CriarTela(url)
+                dados['url'] = url
+
+                with open(caminho_completo, 'w') as file:
+                    json.dump(dados, file, indent=4)
+
+                nova_janela.destroy()
+                Tela.CriarTela(url)
+
+            else:
+                remover_placeholder(txtBox)
+                adicionar_placeholder(txtBox, "Url inválida")
+
             
 
     botao_capturar = tk.Button(nova_janela, text="Confirmar", command=AtualizarPagina)
